@@ -1,4 +1,4 @@
-# validacaodata
+# Validação de data dd/mm/YYYY em javascript
 verifica se a data dd/mm/YYYY é valida em javascript
 
 
