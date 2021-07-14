@@ -1,17 +1,27 @@
-function validaData(data)
-{
-    //YYYY-MM-DD
-    var ISODate = data.split('/').reverse().join('-') + ' 00:00';
-    try {
-        //Criando um objeto Date usando os valores ano, mes e dia.
-        var novaData = new Date(ISODate).toISOString().substr(0, 10).split('-').reverse().join('/');
+function validaDataBr(dataBr, hora = "00", minuto = "00") {
 
-        if (data !== novaData) {
-            return false;
-        }
-        return true;
-    } catch (e){
-        return false;
+    if (parseInt(hora) > 23 || parseInt(hora) < 0) {
+      return false;
     }
 
-}
+    if (parseInt(minuto) > 59 || parseInt(minuto) < 0) {
+      return false;
+    }
+
+    const isoData = dataBr.split("/").reverse().join('-') + 'T00:00:00';
+
+    try {
+      const novaData = new Date(isoData);
+      const novoDia = novaData.getDate().toString().padStart(2, "0");
+      const novoMes = (novaData.getMonth() + 1).toString().padStart(2, "0");
+      const novoAno = novaData.getFullYear().toString();
+      const novaDataFormatada = `${novoDia}/${novoMes}/${novoAno}`;
+      if (novaDataFormatada !== dataBr) {
+        throw new Error('data invalida');
+      }
+    } catch (error) {
+      return false;
+    }
+
+    return true;
+  }
